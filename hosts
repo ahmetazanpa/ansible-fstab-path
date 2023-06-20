@@ -1,5 +1,5 @@
 [all]
-
+192.168.10.2
 
 [all:vars]
 become_user=user
