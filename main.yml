@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: True
+  gather_facts: False
+  vars_prompt:
+    - name: device_vm_ip_address
+      prompt: Enter Device VM IP Address ?
+
+    - name: device_volume_path
+      prompt: Enter Device Volume Path (Ex:/mnt/longhorn) ? 
+    
+    - name: mount_point 
+      prompt: Enter Mount Point (Ex:/var/lib) ? 
+      
+    - name: file_system_type 
+      prompt: Enter Mount Point (Ex:nfs) ? 
+
+  tasks: 
+   - name: Add NFS share to fstab
+     lineinfile:
+        path: /etc/fstab
+        line: "{{ source_vm_ip_address  }}:{{ source_volume_path }}      {{ mount_point }}    {{ file_system_type }}     defaults        0       0"
+        state: present
